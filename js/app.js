@@ -37,7 +37,7 @@ let sttcontract = new web3.eth.Contract(sttabi, sttaddr);
 //***************** our smart-contract integration *****************/
 
 const buystt = async () => {
-  await loadweb3(); loadweb3();
+  await loadweb3();
   const chainId = await web3.eth.getChainId();
   if (addr == undefined) {
     Swal.fire(
@@ -109,16 +109,16 @@ const loashow = async () => {
 
   web3 = new web3js.myweb3(window.ethereum);
   try {
-    console.log('Injected web3 detected.')
+    //console.log('Injected web3 detected.')
     
     var accounts = await web3.eth.getAccounts();
-    console.log(accounts[0])
+    //console.log(accounts[0])
 
     tokenInst = new web3.eth.Contract(sttabi,'0xEf2041ef0DE2d7a411a1fF474EEfb188BEC3F7d0');
     var WalletTokenBalance = await tokenInst.methods.balanceOf(accounts[0]).call();
     Balance = web3.utils.fromWei(WalletTokenBalance);
     //console.log(WalletTokenBalance);
-    console.log(Balance);
+    //console.log(Balance);
     document.getElementById("showballance").innerHTML = "Your balance MTWP token: " + Balance;
 
   } catch (error) {
