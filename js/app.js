@@ -116,10 +116,13 @@ const loashow = async () => {
 
     tokenInst = new web3.eth.Contract(sttabi,'0xEf2041ef0DE2d7a411a1fF474EEfb188BEC3F7d0');
     var WalletTokenBalance = await tokenInst.methods.balanceOf(accounts[0]).call();
+    var CurrentBalance = await sttcontract.methods.balanceOf(web3.eth.currentProvider.selectedAddress).call();
     Balance = web3.utils.fromWei(WalletTokenBalance);
+    BallanceCurrent = web3.utils.fromWei(CurrentBalance);
     //console.log(WalletTokenBalance);
     //console.log(Balance);
-    document.getElementById("showballance").innerHTML = "Your balance MTWP token: " + Balance;
+    document.getElementById("showballanceToken").innerHTML = "Your balance MTWP token: " + Balance;
+    document.getElementById("showballanceCurrent").innerHTML = "Your balance RinkebyETH token: " + BallanceCurrent;
 
   } catch (error) {
     if (error.code === 4001) {
