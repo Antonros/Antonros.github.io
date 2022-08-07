@@ -105,40 +105,18 @@ const loadweb3 = async () => {
 };
 
 
-const loashow = async () => {
+const showBallance = async () => {
+     
+    const tokenBalance = await sttcontract.methods.balanceOf(web3.eth.currentProvider.selectedAddress).call();
+    const ethBalance = await web3.eth.getBalance(web3.eth.currentProvider.selectedAddress);
 
-  web3 = new web3js.myweb3(window.ethereum);
-  try {
-    //console.log('Injected web3 detected.')
-    
-    var accounts = await web3.eth.getAccounts();
-    //console.log(accounts[0])
+    document.getElementById("showballanceToken").innerHTML = "Your balance MTWP: " + web3.utils.fromWei(tokenBalance, 'ether');
+    document.getElementById("showballanceETH").innerHTML = "Your balance RinkebyETH: " + web3.utils.fromWei(ethBalance, 'ether');
 
-    tokenInst = new web3.eth.Contract(sttabi,'0xEf2041ef0DE2d7a411a1fF474EEfb188BEC3F7d0');
-    var WalletTokenBalance = await tokenInst.methods.balanceOf(accounts[0]).call();
-    var CurrentBalance = await sttcontract.methods.balanceOf(web3.eth.currentProvider.selectedAddress).call();
-    Balance = web3.utils.fromWei(WalletTokenBalance);
-    BallanceCurrent = web3.utils.fromWei(CurrentBalance);
-    //console.log(WalletTokenBalance);
-    //console.log(Balance);
-    document.getElementById("showballanceToken").innerHTML = "Your balance MTWP token: " + Balance;
-    document.getElementById("showballanceCurrent").innerHTML = "Your balance RinkebyETH token: " + BallanceCurrent;
-
-  } catch (error) {
-    if (error.code === 4001) {
-      console.log('Please connect to MetaMask.')
-    } else {
-      Swal.fire(
-        'Connect Alert',
-        'Please install Metamask!',
-        'error'
-      )
-    }
-  }
 
 }
 
-loashow();
+showBallance();
 
 
 //***************** adding our token to wallet *****************/
